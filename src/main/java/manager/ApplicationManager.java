@@ -24,7 +24,7 @@ public class ApplicationManager {
     public HelperUser getHelperUser(){
         return helperUser;
     }
-    public HelperBoards grtHelperBoards(){
+    public HelperBoards getHelperBoards(){
         return helperBoards;
     }
 
