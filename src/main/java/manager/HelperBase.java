@@ -45,4 +45,9 @@ public class HelperBase {
         return !driver.findElements(locator).isEmpty();
     }
 
+    public boolean isTextInElementEquals(By locator, String text){
+        WebElement element = findElementBase(locator);
+        return element.getText().equals(text);
+    }
+
 }

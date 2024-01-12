@@ -1,7 +1,9 @@
 package manager;
 
+import models.UserDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 
 public class HelperUser extends HelperBase{
 
@@ -28,5 +30,13 @@ public class HelperUser extends HelperBase{
 
     public boolean isElementPresent_ButtonAccount(){
         return isElementPresent(buttonAccount);
+    }
+
+    public void loginDTO(UserDTO user) {
+        clickBase(buttonLogin);
+        typeBase(inputLogin, user.getEmail());
+        clickBase(buttonContinue);
+        typeBase(inputPassword,user.getPassword());
+        clickBase(buttonLoginSubmit);
     }
 }
