@@ -28,7 +28,7 @@ public class BoardTests extends TestBase {
                 .build();
                 app.getHelperBoards().createNewBoard(board);
         Assert.assertTrue(app.getHelperBoards().isBoardTitlePresent(board.getBoardTitle()));
-        
+
     }
 
     @Test
