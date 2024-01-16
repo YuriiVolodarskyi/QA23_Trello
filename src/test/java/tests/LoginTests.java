@@ -20,6 +20,7 @@ public class LoginTests extends TestBase {
                 .password("QwertyZXC123!")
                 .build();
         app.getHelperUser().loginDTO(user);
+        app.getHelperUser().pause(3);
         Assert.assertTrue(app.getHelperUser().isElementPresent_ButtonAccount());
         //System.out.println("Start!");
     }

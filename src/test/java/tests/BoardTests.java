@@ -31,13 +31,26 @@ public class BoardTests extends TestBase {
 
     }
 
+
     @Test
     public void deletePositiveTest() {
-        System.out.println("Second");
+        int i = new Random().nextInt(1000)+1000;
+        BoardDTO board = BoardDTO.builder()
+                .boardTitle("board" + i)
+                .build();
+        app.getHelperBoards().createNewBoard(board);
+        Assert.assertTrue(app.getHelperBoards().isBoardTitlePresent(board.getBoardTitle()));
+        app.getHelperBoards().clickButtonBoards();
+
+        app.getHelperBoards().deleteBoard(board.getBoardTitle());
+        Assert.assertTrue(app.getHelperBoards().isTextMessagePresentByText ());
     }
+
+
 
     @AfterMethod
     public void afterMethod(){
-        app.getHelperBoards().clickButtonBoards();
+        if(app.getHelperBoards().isElementPresent_buttonBoards())
+                app.getHelperBoards().clickButtonBoards();
     }
 }
