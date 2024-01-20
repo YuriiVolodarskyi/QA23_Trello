@@ -4,6 +4,8 @@ import models.UserDTO;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class LoginTests extends TestBase {
 
     /*  @Test
@@ -14,13 +16,14 @@ public class LoginTests extends TestBase {
     }
 */
     @Test
-    public void loginPositiveTestDTO() {
+    public void loginPositiveTestDTO() throws IOException {
         UserDTO user = UserDTO.builder()
                 .email("alexmedqwerty1@gmail.com")
                 .password("QwertyZXC123!")
                 .build();
         app.getHelperUser().loginDTO(user);
         app.getHelperUser().pause(3);
+        app.getHelperUser().takeScreenShot();
         Assert.assertTrue(app.getHelperUser().isElementPresent_ButtonAccount());
         //System.out.println("Start!");
     }

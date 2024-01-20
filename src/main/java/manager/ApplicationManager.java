@@ -10,6 +10,7 @@ public class ApplicationManager {
     WebDriver driver;
     HelperUser helperUser;
     HelperBoards helperBoards;
+    HelperProfile helperProfile;
 
 
     public void init(){
@@ -19,6 +20,8 @@ public class ApplicationManager {
         driver.navigate().to("https://trello.com/home");
         helperUser = new HelperUser(driver);
         helperBoards = new HelperBoards(driver);
+        helperProfile = new HelperProfile(driver);
+
     }
 
     public HelperUser getHelperUser(){
@@ -26,6 +29,10 @@ public class ApplicationManager {
     }
     public HelperBoards getHelperBoards(){
         return helperBoards;
+    }
+
+    public HelperProfile getHelperProfile(){
+        return helperProfile;
     }
 
     public void stop(){

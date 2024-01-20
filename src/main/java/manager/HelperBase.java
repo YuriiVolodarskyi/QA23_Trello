@@ -1,9 +1,12 @@
 package manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class HelperBase {
@@ -13,41 +16,65 @@ public class HelperBase {
         this.driver = driver;
     }
 
-    private WebElement findElementBase(By locator){
+    By buttonAccount = By.xpath("//button[@data-testid='header-member-menu-button']");
+
+    private WebElement findElementBase(By locator) {
         return driver.findElement(locator);
     }
 
-    private List<WebElement> findElementsBase(By locator){
+    private List<WebElement> findElementsBase(By locator) {
         return driver.findElements(locator);
     }
 
-    public void pause(int time){
+    public void pause(int time) {
         try {
-            Thread.sleep(time* 1000L);
+            Thread.sleep(time * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void clickBase(By locator){
+    public void clickBase(By locator) {
         WebElement element = findElementBase(locator);
         element.click();
     }
 
-    public void typeBase(By locator, String test){
+    public void typeBase(By locator, String test) {
         WebElement element = findElementBase(locator);
         element.click();
         element.clear();
         element.sendKeys(test);
     }
 
-    public boolean isElementPresent(By locator){
+    public boolean isElementPresent(By locator) {
         return !driver.findElements(locator).isEmpty();
     }
 
-    public boolean isTextInElementEquals(By locator, String text){
+    public boolean isTextInElementEquals(By locator, String text) {
         WebElement element = findElementBase(locator);
         return element.getText().equals(text);
     }
+
+    private String createFileNameScreenShot() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        System.out.println(date);
+        String currentDate = formatter.format(date);
+        System.out.println(currentDate);
+        String fileName = currentDate.replace(":", "-");
+        System.out.println(fileName);
+        String filePath = "src/test_logs/screenshots/screenshot_" + fileName + ".png";
+        return filePath;
+    }
+
+    public void takeScreenShot() {
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            Files.copy(scrFile, new File(createFileNameScreenShot()));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
+
 
 }

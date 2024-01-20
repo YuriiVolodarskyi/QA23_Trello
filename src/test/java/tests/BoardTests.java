@@ -14,11 +14,9 @@ public class BoardTests extends TestBase {
 
     @BeforeClass
     public void loginDTO() {
-        app.getHelperUser().loginDTO(UserDTO.builder()
-                .email("alexmedqwerty1@gmail.com")
-                .password("QwertyZXC123!")
-                .build());
+        app.getHelperUser().loginDTO(user);
     }
+
 
     @Test
     public void addNewBoardPositiveTest() {
