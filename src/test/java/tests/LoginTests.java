@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 public class LoginTests extends TestBase {
 
@@ -16,15 +17,17 @@ public class LoginTests extends TestBase {
     }
 */
     @Test
-    public void loginPositiveTestDTO() throws IOException {
+    public void loginPositiveTestDTO(Method method) throws IOException {
         UserDTO user = UserDTO.builder()
                 .email("alexmedqwerty1@gmail.com")
                 .password("QwertyZXC123!")
                 .build();
+        logger.info("start method " + method.getName() + " with email-->" + user.getEmail() + " with password" + user.getPassword());
         app.getHelperUser().loginDTO(user);
         app.getHelperUser().pause(3);
         app.getHelperUser().takeScreenShot();
         Assert.assertTrue(app.getHelperUser().isElementPresent_ButtonAccount());
+
         //System.out.println("Start!");
     }
 

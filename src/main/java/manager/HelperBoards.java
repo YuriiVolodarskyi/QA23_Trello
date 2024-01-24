@@ -3,9 +3,12 @@ package manager;
 import models.BoardDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class HelperBoards extends HelperBase{
+import java.util.List;
+
+public class HelperBoards extends HelperBase {
     public HelperBoards(WebDriver driver) {
         super(driver);
     }
@@ -18,7 +21,7 @@ public class HelperBoards extends HelperBase{
 
     //========================
     By buttonDots = By.cssSelector("button[aria-label='Show menu']");
-    By buttonCloseBoard  =
+    By buttonCloseBoard =
             By.cssSelector("a[class=\"board-menu-navigation-item-link board-menu-navigation-item-link-v2 js-close-board\"]");
     By buttonCloseConfirm = By.cssSelector("input[value='Close']");
     By buttonDeleteBoard = By.cssSelector("button[data-testid='close-board-delete-board-button']");
@@ -26,7 +29,14 @@ public class HelperBoards extends HelperBase{
     By deleteMessage = By.cssSelector("div[id='FlagGroup']");
     By deleteMessageText = By.xpath("//span[text()='Board deleted.']");
 
+    //========================
+    By listBoard = By.xpath("//ul[@class='boards-page-board-section-list']/li");
+    public void deleteElementList() {
+        //pause(3);
+        List<WebElement> listElements = driver.findElements(listBoard);
+        System.out.println("size = " + listElements.size());
 
+    }
 
     public void createNewBoard(BoardDTO board) {
         pause(2);
@@ -37,7 +47,7 @@ public class HelperBoards extends HelperBase{
 
     }
 
-    public void deleteBoard(String boardTitle){
+    public void deleteBoard(String boardTitle) {
         clickBoardOnTitle(boardTitle);
         driver.navigate().refresh();
         clickBase(buttonDots);
@@ -53,11 +63,11 @@ public class HelperBoards extends HelperBase{
 
     }
 
-    public boolean isBoardTitlePresent(String text){
+    public boolean isBoardTitlePresent(String text) {
         return isTextInElementEquals(boardNameDisplay, text);
     }
 
-    public void clickButtonBoards(){
+    public void clickButtonBoards() {
         clickBase(buttonBoards);
     }
 
@@ -66,7 +76,7 @@ public class HelperBoards extends HelperBase{
         return isTextInElementEquals(deleteMessage, "Board deleted.");
     }
 
-    public boolean isTextMessagePresentByText(){
+    public boolean isTextMessagePresentByText() {
         return isElementPresent(deleteMessageText);
     }
 

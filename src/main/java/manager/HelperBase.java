@@ -2,6 +2,8 @@ package manager;
 
 import com.google.common.io.Files;
 import org.openqa.selenium.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public class HelperBase {
+    Logger logger= LoggerFactory.getLogger(HelperBase.class);
     WebDriver driver;
 
     public HelperBase(WebDriver driver) {
@@ -58,11 +61,11 @@ public class HelperBase {
     private String createFileNameScreenShot() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
-        System.out.println(date);
+        //System.out.println(date);
         String currentDate = formatter.format(date);
-        System.out.println(currentDate);
+        //System.out.println(currentDate);
         String fileName = currentDate.replace(":", "-");
-        System.out.println(fileName);
+        //System.out.println(fileName);
         String filePath = "src/test_logs/screenshots/screenshot_" + fileName + ".png";
         return filePath;
     }
