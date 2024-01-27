@@ -58,26 +58,7 @@ public class HelperBase {
         return element.getText().equals(text);
     }
 
-    private String createFileNameScreenShot() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        Date date = new Date(System.currentTimeMillis());
-        //System.out.println(date);
-        String currentDate = formatter.format(date);
-        //System.out.println(currentDate);
-        String fileName = currentDate.replace(":", "-");
-        //System.out.println(fileName);
-        String filePath = "src/test_logs/screenshots/screenshot_" + fileName + ".png";
-        return filePath;
-    }
 
-    public void takeScreenShot() {
-        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            Files.copy(scrFile, new File(createFileNameScreenShot()));
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-    }
 
 
 }
