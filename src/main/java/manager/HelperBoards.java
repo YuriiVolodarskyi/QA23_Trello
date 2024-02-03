@@ -28,13 +28,28 @@ public class HelperBoards extends HelperBase {
     By buttonDeleteConfirm = By.cssSelector("button[data-testid='close-board-delete-board-confirm-button']");
     By deleteMessage = By.cssSelector("div[id='FlagGroup']");
     By deleteMessageText = By.xpath("//span[text()='Board deleted.']");
+    By secondElementListBoard = By.xpath("//ul[@class='boards-page-board-section-list']/li[2]");
 
     //========================
     By listBoard = By.xpath("//ul[@class='boards-page-board-section-list']/li");
+
     public void deleteElementList() {
         //pause(3);
         List<WebElement> listElements = driver.findElements(listBoard);
         System.out.println("size = " + listElements.size());
+
+        for (int i = 0; i < listElements.size(); i++) {
+            WebElement element = driver.findElement(secondElementListBoard);
+            if(element.getAttribute("data-testid") == null) {
+                element.click();
+                clickBaseWait(buttonDots, 3);
+                clickBaseWait(buttonCloseBoard, 3);
+                clickBaseWait(buttonCloseConfirm, 3);
+                clickBaseWait(buttonDeleteBoard, 3);
+                clickBaseWait(buttonDeleteConfirm, 3);
+            }
+
+        }
 
     }
 

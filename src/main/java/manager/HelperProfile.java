@@ -2,7 +2,9 @@ package manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,9 @@ public class HelperProfile extends HelperBase {
 
     By buttonChangeProfilePhoto = By.xpath("//button[@data-testid='change-avatar']");
 
-    By buttonUploadPhoto = By.xpath("//button[@data-testid='upload-button']");
+    By buttonUploadPhoto = By.xpath("//input[@id='image-input']");
+    By buttonUpload = By.xpath("//button[@type='submit']");
+    By popUpAvatarAdded = By.xpath("//span[text()='Avatar added']");
 
     public void changeAvatar() {
         clickBase(buttonAccount);
@@ -29,7 +33,15 @@ public class HelperProfile extends HelperBase {
         pause(5);
         clickBase(buttonProfilePhoto);
         clickBase(buttonChangeProfilePhoto);
-        clickBase(buttonUploadPhoto);
+        File file = new File("src/test/resources/cat2.jpeg");
+        String path = file.getAbsolutePath();
+        WebElement element  = driver.findElement(buttonUploadPhoto);
+        element.sendKeys(path);
+        pause(5);
+        clickBase(buttonUpload);
+    }
 
+    public boolean isTextInElementPresentByWait_AvatarAdded() {
+        return isTextInElementPresentByWait(popUpAvatarAdded, "Avatar added", 10);
     }
 }
