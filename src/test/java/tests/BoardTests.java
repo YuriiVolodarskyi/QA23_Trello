@@ -13,7 +13,7 @@ import java.util.Random;
 @Listeners(TestNGListener.class)
 public class BoardTests extends TestBase {
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void loginDTO() {
         logger.info("start method before class --> " + "with data -->" + user.getEmail() + " " + user.getPassword());
         app.getHelperUser().loginDTO(user);
@@ -36,7 +36,7 @@ public class BoardTests extends TestBase {
     }
 
 
-    @Test(dataProvider = "dataProvider_deleteBoardPositiveTestFile", dataProviderClass = DataProviderBoard.class)
+    @Test(groups={"positive"}, dataProvider = "dataProvider_deleteBoardPositiveTestFile", dataProviderClass = DataProviderBoard.class)
     public void deleteBoardPositiveTest(BoardDTO board) {
       /*  int i = new Random().nextInt(1000) + 1000;
         BoardDTO board = BoardDTO.builder()
@@ -59,10 +59,15 @@ public class BoardTests extends TestBase {
     }
 
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         logger.info("start afterMethod");
         if (app.getHelperBoards().isElementPresent_buttonBoards())
             app.getHelperBoards().clickButtonBoards();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void logout(){
+        app.getHelperUser().logout();
     }
 }

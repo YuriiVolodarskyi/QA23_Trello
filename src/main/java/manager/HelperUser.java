@@ -4,6 +4,9 @@ import models.UserDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class HelperUser extends HelperBase{
 
@@ -17,8 +20,8 @@ public class HelperUser extends HelperBase{
     By inputPassword = By.id("password");
     By buttonLoginSubmit = By.id("login-submit");
     //By buttonAccount = By.xpath("//button[@data-testid='header-member-menu-button']");
-
-
+    By buttonLogout = By.xpath("//button[@data-testid='account-menu-logout']");
+    By buttonLogoutSubmit = By.id("logout-submit");
 
     public void login(String email, String password) {
         clickBase(buttonLogin);
@@ -38,5 +41,16 @@ public class HelperUser extends HelperBase{
         clickBase(buttonContinue);
         typeBase(inputPassword,user.getPassword());
         clickBase(buttonLoginSubmit);
+    }
+
+    public void logout() {
+        clickBase(buttonAccount);
+        clickBase(buttonLogout);
+        clickBase(buttonLogoutSubmit);
+    }
+
+    public void returnToHomePage() {
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
     }
 }

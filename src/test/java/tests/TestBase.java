@@ -15,12 +15,12 @@ public class TestBase {
             .password("QwertyZXC123!")
             .build();
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void setUp(){
         logger.info("start method BeforeSuite");
         app.init();
     }
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void tearDown(){
         logger.info("start method AfterSuite");
         //app.stop();

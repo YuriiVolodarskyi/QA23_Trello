@@ -3,6 +3,7 @@ package tests;
 import manager.TestNGListener;
 import models.UserDTO;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -19,7 +20,7 @@ public class LoginTests extends TestBase {
         //System.out.println("Start!");
     }
 */
-    @Test
+    @Test(groups = {"smoke"})
     public void loginPositiveTestDTO(Method method) throws IOException {
         UserDTO user = UserDTO.builder()
                 .email("alexmedqwerty1@gmail.com")
@@ -34,4 +35,8 @@ public class LoginTests extends TestBase {
         //System.out.println("Start!");
     }
 
+    @AfterClass(alwaysRun = true)
+    public void logout(){
+        app.getHelperUser().logout();
+    }
 }

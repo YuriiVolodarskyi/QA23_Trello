@@ -25,3 +25,36 @@ dependencies {
 test {
     useTestNG()
 }
+
+task boardtests(type: Test){
+    useTestNG(){
+        suites 'src/test/resources/boardtest.xml'
+    }
+    if(project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
+}
+
+task positivetests(type: Test){
+    useTestNG(){
+        suites 'src/test/resources/positive_tests.xml'
+    }
+    if(project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
+
+}
+
+task shorttest(type: Test) {
+    useTestNG() {
+       def suite = System.getProperty("suite");
+        if (suite.equals("smoke")){
+            suites 'src/test/resources/smoketest.xml'
+        } else if (suite.equals("positivetest")){
+            suites 'src/test/resources/positive_tests.xml'
+        } else {
+            suites 'src/test/resources/profiletests.xml'
+        }
+
+    }
+}
