@@ -7,3 +7,4 @@ cd QA_Projects\QA23_Trello
 D:
 cd C:\Tools
 java -jar jenkins.war
+./gradlew clean boardtests -Pbtarget=prod
